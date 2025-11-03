@@ -6,7 +6,7 @@
 /*   By: intherna <intherna@student.42barcelona.co  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/18 18:28:56 by intherna          #+#    #+#             */
-/*   Updated: 2025/10/21 20:30:59 by intherna         ###   ########.fr       */
+/*   Updated: 2025/11/03 17:09:42 by intherna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	raycast_zero_y(char **map, t_ray *ray)
 	int	delta;
 
 	delta = (int)sign(ray->dir.y);
-	while (map[ray->pos.y][ray->pos.x] != '1')
+	while (map[ray->pos.y][ray->pos.x] == '0')
 	{
 		ray->wall.y += delta;
 		ray->pos.y += delta;
@@ -31,7 +31,7 @@ void	raycast_zero_x(char **map, t_ray *ray)
 	int	delta;
 
 	delta = (int)sign(ray->dir.x);
-	while (map[ray->pos.y][ray->pos.x] != '1')
+	while (map[ray->pos.y][ray->pos.x] == '0')
 	{
 		ray->wall.x += delta;
 		ray->pos.x += delta;

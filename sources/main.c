@@ -6,7 +6,7 @@
 /*   By: cmarrued <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/21 16:33:54 by cmarrued          #+#    #+#             */
-/*   Updated: 2025/10/01 17:13:57 by intherna         ###   ########.fr       */
+/*   Updated: 2025/11/03 17:02:42 by intherna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,10 @@ int	main(int arg, char **av)
 	print_controls();
 	fill(&data);
 	mlx_put_image_to_window(data.mlx, data.win, data.canvas.img, 0, 0);
+	for (int i = 0; i < data.mapinfo.height; i++) {
+		write(1, data.map[i], data.mapinfo.width);
+		write(1, "\n", 1);
+	}
 	listen_input(&data);
 	mlx_loop_hook(data.mlx, render, &data);
 	mlx_loop(data.mlx);

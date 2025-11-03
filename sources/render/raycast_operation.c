@@ -6,7 +6,7 @@
 /*   By: intherna <intherna@student.42barcelona.co  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 19:29:09 by intherna          #+#    #+#             */
-/*   Updated: 2025/10/24 18:24:17 by intherna         ###   ########.fr       */
+/*   Updated: 2025/11/03 17:09:08 by intherna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	raycast_at(char **map, t_ray *ray)
 	ray->wall = ray->from;
 	signs = (t_point){sign(ray->dir.x), sign(ray->dir.y)};
 	ray->pos = (t_ipoint){(int)ray->from.x, (int)ray->from.y};
-	while (map[ray->pos.y][ray->pos.x] != '1')
+	while (map[ray->pos.y][ray->pos.x] == '0')
 	{
 		deltas.x = (signs.x > 0) * (ceil(ray->wall.x) - ray->wall.x)
 			+ (signs.x < 0) * (floor(ray->wall.x) - ray->wall.x)
