@@ -1,0 +1,7 @@
+cub3D
+cub3D_bonus
+objects/
+*.o
+*.d
+*.a
+.clangd
