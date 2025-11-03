@@ -19,34 +19,11 @@ SO textures/test/north.xpm
                         WE textures/test/north.xpm
         EA textures/test/north.xpm
 
-        F  2    a   ,            																																																																																																																																																																																												 20,             20
-C 200,          200,200
+        F  2                                   ,            																																																																																																																																																																																												 20,             20
+C 200,          100,200
 
 11111
 10001
-10E01              
-1001
-11111               
-
-        
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+10001      
+1111111100E0 
+11111      

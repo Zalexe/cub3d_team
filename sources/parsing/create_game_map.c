@@ -52,8 +52,8 @@ static int	fill_map_tab(t_mapinfo *mapinfo, char **map_tab, int index)
 			map_tab[i][j] = mapinfo->file[index][j];
 			j++;
 		}
-		while (j < mapinfo->width)
-			map_tab[i][j++] = '1';
+		while (j < mapinfo->width){
+			map_tab[i][j++] = '\0';}
 		i++;
 		index++;
 	}
@@ -83,7 +83,7 @@ static void	change_space_into_wall(t_data *data)
 	while (data->map[i])
 	{
 		j = 0;
-		while (j != data->mapinfo.width)
+		while (j < data->mapinfo.width)
 		{
 			if (data->map[i][j] == ' ' || data->map[i][j] == '\t'
 			|| data->map[i][j] == '\r'

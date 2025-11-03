@@ -12,47 +12,31 @@
 
 #include "cub3d.h"
 
-static int	check_str_num(char *str)
-{
-	char	*limit;
-	int		found_greater;
-
-	while (*str && (*str == ' ' || *str == '\t'))
-		str++;
-	if (!ft_isdigit(*str))
-		return (0);
-	limit = "2147483647";
-	found_greater = 0;
-	while (*limit && *str && *str != ' ')
-	{
-		if (!found_greater && *str > *limit)
-			found_greater = 1;
-		str++;
-		limit++;
-	}
-	if (!ft_isdigit(*str))
-		return (0);
-	if (*str == ' ' && *limit)
-		return (1);
-	if (*limit == '\0' && (found_greater || ft_isdigit(*str)))
-		return (0);
-	return (1);
-}
-
 static bool	no_digit(char *str)
 {
-	int		i;
-	bool	found_no_digit;
+	int		counter;
 
-	i = 0;
-	found_no_digit = true;
-	while (str[i])
+	counter = 0;
+	while (*str && (*str == ' ' || *str == '\t'
+			|| *str == '\r'
+			|| *str == '\v' || *str == '\f' || *str == '0'))
+		str++;
+	while (*str && (*str != ' ' && *str != '\t'
+			&& *str != '\r'
+			&& *str != '\v' && *str != '\f' && *str != '\n'))
 	{
-		if (ft_isdigit(str[i]) == 1)
-			found_no_digit = false;
-		i++;
+		if (counter > 3 || !ft_isdigit(*str))
+			return (true);
+		counter++;
+		str++;
 	}
-	return (found_no_digit);
+	while (*str && (*str == ' ' || *str == '\t'
+			|| *str == '\r'
+			|| *str == '\v' || *str == '\f' || *str == '\n'))
+		str++;
+	if (*str)
+		return (true);
+	return (false);
 }
 
 static uint32_t	extract_rgb(char **rgb_to_convert)
@@ -66,8 +50,7 @@ static uint32_t	extract_rgb(char **rgb_to_convert)
 	while (rgb_to_convert[++i])
 	{
 		tmp = ft_atoi(rgb_to_convert[i]);
-		if (no_digit(rgb_to_convert[i])
-			|| !check_str_num(rgb_to_convert[i]) || tmp > 255)
+		if (no_digit(rgb_to_convert[i]) || tmp > 255)
 		{
 			free_tab((void **)rgb_to_convert);
 			return (-1);
