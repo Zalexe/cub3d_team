@@ -6,7 +6,7 @@
 /*   By: intherna <intherna@student.42barcelona.co  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/20 18:00:43 by intherna          #+#    #+#             */
-/*   Updated: 2025/10/29 16:45:25 by intherna         ###   ########.fr       */
+/*   Updated: 2025/11/03 19:21:47 by intherna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,9 +50,9 @@ void	prepare(t_data *data, t_ray *ray, double ld)
 {
 	ray->from = (t_point){data->player.pos_x, data->player.pos_y};
 	if (ray->dir.x == 0.0 || ray->dir.y == 0.0)
-		raycast_at_zero(data->map, ray);
+		raycast_at_zero(data, ray);
 	else
-		raycast_at(data->map, ray);
+		raycast_at(data, ray);
 	ray->dir_end = get_dir(data, &ray->wall_end);
 	ray->dist = diff(ray->wall, ray->from);
 	if (ray->dist < ld)
@@ -79,9 +79,9 @@ static void	loop_reverse(t_data *data, t_loopdata *cl, t_loopdata *d)
 		cl->ray.dir = get_dir_from_rads(data->player.angle
 				+ atan(cl->cam_x * d->plane));
 		if (cl->ray.dir.x == 0.0 || cl->ray.dir.y == 0.0)
-			raycast_at_zero(data->map, &cl->ray);
+			raycast_at_zero(data, &cl->ray);
 		else
-			raycast_at(data->map, &cl->ray);
+			raycast_at(data, &cl->ray);
 		cl->ray.dir_end = get_dir(data, &cl->ray.wall_end);
 		cl->ray.dist = diff(cl->ray.wall_base, cl->ray.from);
 		fetch_texture(data, &cl->ray);
@@ -108,9 +108,9 @@ void	reverse_fix(t_data *data, t_loopdata *d)
 			+ atan(cl.cam_x * d->plane));
 	cl.ray.from = (t_point){data->player.pos_x, data->player.pos_y};
 	if (cl.ray.dir.x == 0.0 || cl.ray.dir.y == 0.0)
-		raycast_at_zero(data->map, &cl.ray);
+		raycast_at_zero(data, &cl.ray);
 	else
-		raycast_at(data->map, &cl.ray);
+		raycast_at(data, &cl.ray);
 	cl.ray.dir_end = cl.ray.dir;
 	cl.ray.dist = diff(cl.ray.wall_base, cl.ray.from);
 	fetch_texture(data, &cl.ray);

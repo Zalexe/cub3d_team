@@ -6,7 +6,7 @@
 /*   By: intherna <intherna@student.42barcelona.co  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 19:29:09 by intherna          #+#    #+#             */
-/*   Updated: 2025/11/03 17:09:08 by intherna         ###   ########.fr       */
+/*   Updated: 2025/11/03 19:20:03 by intherna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
  * on a specified direction, and stops when it finds
  * a wall cell.
  */
-void	raycast_at(char **map, t_ray *ray)
+void	raycast_at(t_data *d, t_ray *ray)
 {
 	t_point		deltas;
 	t_point		signs;
@@ -31,8 +31,11 @@ void	raycast_at(char **map, t_ray *ray)
 	ray->wall = ray->from;
 	signs = (t_point){sign(ray->dir.x), sign(ray->dir.y)};
 	ray->pos = (t_ipoint){(int)ray->from.x, (int)ray->from.y};
-	while (map[ray->pos.y][ray->pos.x] == '0')
+	while (d->map[ray->pos.y][ray->pos.x] == '0')
 	{
+		if (ray->pos.x < 0 || ray->pos.x >= d->mapinfo.width
+			|| ray->pos.y < 0 || ray->pos.y >= d->mapinfo.height)
+			break ;
 		deltas.x = (signs.x > 0) * (ceil(ray->wall.x) - ray->wall.x)
 			+ (signs.x < 0) * (floor(ray->wall.x) - ray->wall.x)
 			+ (signs.x * (trunc(ray->wall.x) == ray->wall.x));
@@ -51,15 +54,15 @@ void	raycast_at(char **map, t_ray *ray)
  * It just raycasts in a straight fixed direction without taking
  * into account the 0 side.
  */
-void	raycast_at_zero(char **map, t_ray *ray)
+void	raycast_at_zero(t_data *d, t_ray *ray)
 {
 	ray->pos = (t_ipoint){(int)ray->from.x, (int)ray->from.y};
 	ray->wall = ray->from;
 	ray->vertical = ray->dir.y == 0.0;
 	if (ray->vertical)
-		raycast_zero_x(map, ray);
+		raycast_zero_x(d, ray);
 	else
-		raycast_zero_y(map, ray);
+		raycast_zero_y(d, ray);
 }
 
 /**
@@ -122,9 +125,9 @@ void	raycast_end(t_data *d, t_loopdata *l)
 	last_pos = l->ray.pos;
 	l->ray.dir = get_dir_from_rads(d->player.angle + atan(1.0 * l->plane));
 	if (l->ray.dir.x == 0.0 || l->ray.dir.y == 0.0)
-		raycast_at_zero(d->map, &l->ray);
+		raycast_at_zero(d, &l->ray);
 	else
-		raycast_at(d->map, &l->ray);
+		raycast_at(d, &l->ray);
 	l->ray.dist = diff(l->ray.wall_base, l->ray.from);
 	if (l->ray.dist <= l->last_dist)
 		reverse_fix(d, l);

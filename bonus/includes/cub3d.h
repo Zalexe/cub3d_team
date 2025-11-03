@@ -6,7 +6,7 @@
 /*   By: cmarrued <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/12 17:32:52 by cmarrued          #+#    #+#             */
-/*   Updated: 2025/11/03 18:59:31 by intherna         ###   ########.fr       */
+/*   Updated: 2025/11/03 19:18:30 by intherna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -285,13 +285,13 @@ void	fill(t_data *data);
 
 /* render/raycast.c */
 void	raycast(t_data *data);
-void	raycast_at(char **map, t_ray *ray);
-void	raycast_at_zero(char **map, t_ray *ray);
+void	raycast_at(t_data *data, t_ray *ray);
+void	raycast_at_zero(t_data *data, t_ray *ray);
 void	raycast_end(t_data *d, t_loopdata *ldata);
 void	raycast_until_zero(t_ray *ray, t_ipoint stop);
 void	raycast_until(t_data *d, t_ray *ray, t_ipoint stop, bool vertical);
-void	raycast_zero_y(char **map, t_ray *ray);
-void	raycast_zero_x(char **map, t_ray *ray);
+void	raycast_zero_y(t_data *data, t_ray *ray);
+void	raycast_zero_x(t_data *data, t_ray *ray);
 void	raycast_until_zero_y(t_ray *ray, t_ipoint stop);
 void	raycast_until_zero_x(t_ray *ray, t_ipoint stop);
 void	fetch_texture(t_data *data, t_ray *ray);
