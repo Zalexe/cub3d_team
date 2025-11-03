@@ -6,7 +6,7 @@
 /*   By: cmarrued <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/10 17:31:42 by cmarrued          #+#    #+#             */
-/*   Updated: 2025/09/21 18:58:56 by intherna         ###   ########.fr       */
+/*   Updated: 2025/11/03 19:09:53 by intherna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ static bool	no_digit(char *str)
 {
 	int		counter;
 
+	if (!*str || *str == '\n')
+		return (true);
 	counter = 0;
 	while (*str && (*str == ' ' || *str == '\t'
 			|| *str == '\r'

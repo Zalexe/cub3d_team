@@ -6,7 +6,7 @@
 /*   By: cmarrued <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/12 17:32:52 by cmarrued          #+#    #+#             */
-/*   Updated: 2025/10/23 20:09:04 by intherna         ###   ########.fr       */
+/*   Updated: 2025/11/03 18:59:31 by intherna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@
 
 /* -----------------------  DEFINES  ---------------------------------- */
 
-# define WIN_WIDTH 640
-# define WIN_HEIGHT 480
+# define WIN_WIDTH 1480
+# define WIN_HEIGHT 860
 
 # define FOV 1.15
 
